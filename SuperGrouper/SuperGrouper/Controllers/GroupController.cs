@@ -1,8 +1,6 @@
-﻿using System;
+﻿using SuperGrouper.Models;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace SuperGrouper.Controllers
@@ -10,19 +8,19 @@ namespace SuperGrouper.Controllers
     public class GroupController : ApiController
     {
         // GET: api/Group
-        public IEnumerable<string> Get()
+        public IEnumerable<Group> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new List<Group>();
         }
 
         // GET: api/Group/5
-        public string Get(int id)
+        public Group Get(Guid id)
         {
-            return "value";
+            return new Group();
         }
 
         // POST: api/Group
-        public void Post([FromBody]string value)
+        public void Post([FromBody]Group group)
         {
         }
 
