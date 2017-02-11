@@ -1,29 +1,56 @@
-﻿using System;
+﻿using SuperGrouper.Models;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
+using SuperGrouper.Repositories;
+using SuperGrouper.Repositories.Interfaces;
 
 namespace SuperGrouper.Controllers
 {
-    public class GroupController : ApiController
+    public sealed class GroupController : ApiController
     {
-        // GET: api/Group
-        public IEnumerable<string> Get()
+        private readonly IGroupRepository _groupRepository;
+
+        public GroupController(IGroupRepository groupRepository)
         {
-            return new string[] { "value1", "value2" };
+            if (groupRepository == null)
+            {
+                throw new ArgumentNullException("groupRepository");
+            }
+
+            _groupRepository = groupRepository;
+        }
+        // GET: api/Group
+        public IEnumerable<Group> Get()
+        {
+            return new List<Group>();
         }
 
         // GET: api/Group/5
-        public string Get(int id)
+        public IHttpActionResult Get(Guid groupId)
         {
-            return "value";
+            var group = _groupRepository.GetGroup(groupId);
+
+            if (group != null)
+            {
+                return Ok(group);
+            }
+
+            return InternalServerError();
         }
 
         // POST: api/Group
-        public void Post([FromBody]string value)
+        public IHttpActionResult Post([FromBody]Group group)
         {
+            var savedGroup = _groupRepository.SaveGroup(group);
+
+            if (savedGroup != null)
+            {
+                return Ok(savedGroup);
+            }
+
+            return InternalServerError();
         }
 
         // PUT: api/Group/5
