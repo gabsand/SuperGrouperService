@@ -23,7 +23,7 @@ namespace SuperGrouper.Controllers
         }
 
         // GET: api/Group/5
-        public async Task<IHttpActionResult> Get(Guid groupId)
+        public async Task<IHttpActionResult> Get(string groupId)
         {
             var group = await _groupRepository.GetGroup(groupId);
 

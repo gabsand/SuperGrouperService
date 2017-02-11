@@ -8,6 +8,6 @@ namespace SuperGrouper.Repositories.Interfaces
     {
         Task<Group> SaveGroup(Group group);
 
-        Task<Group> GetGroup(Guid groupId);
+        Task<Group> GetGroup(string groupId);
     }
 }

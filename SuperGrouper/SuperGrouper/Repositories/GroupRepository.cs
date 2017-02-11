@@ -1,9 +1,8 @@
-﻿using System;
-using SuperGrouper.Repositories.Interfaces;
+﻿using SuperGrouper.Repositories.Interfaces;
 using SuperGrouper.Models;
-using MongoDB;
 using MongoDB.Driver;
 using System.Threading.Tasks;
+using MongoDB.Bson;
 
 namespace SuperGrouper.Repositories
 {
@@ -22,10 +21,10 @@ namespace SuperGrouper.Repositories
             return group;
         }
 
-        public async Task<Group> GetGroup(Guid groupId)
+        public async Task<Group> GetGroup(string groupId)
         {
-            var filter = Builders<Group>.Filter.Eq("Id", groupId.ToString());
-            var group = await _groupCollection.Find(filter).FirstAsync();
+            var filter = Builders<Group>.Filter.Eq("_id", ObjectId.Parse(groupId));
+            var group = await _groupCollection.Find(filter).SingleOrDefaultAsync();
 
             return group;
         }
