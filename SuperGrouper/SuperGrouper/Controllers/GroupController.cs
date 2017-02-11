@@ -12,7 +12,7 @@ namespace SuperGrouper.Controllers
     {
         private readonly IGroupRepository _groupRepository;
 
-        GroupController(IGroupRepository groupRepository)
+        public GroupController(IGroupRepository groupRepository)
         {
             if (groupRepository == null)
             {
