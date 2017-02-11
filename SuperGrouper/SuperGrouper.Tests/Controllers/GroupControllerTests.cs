@@ -21,7 +21,7 @@ namespace SuperGrouper.Tests.Controllers
             var sut = new GroupController(groupRepository.Object);
 
             var actionResult = sut.Get(groupId);
-            var contentResult = actionResult as InternalServerErrorResult;
+            var contentResult = actionResult as NotFoundResult;
 
             Assert.IsNotNull(contentResult);
         }

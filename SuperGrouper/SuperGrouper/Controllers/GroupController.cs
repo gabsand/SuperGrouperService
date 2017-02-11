@@ -21,11 +21,6 @@ namespace SuperGrouper.Controllers
 
             _groupRepository = groupRepository;
         }
-        // GET: api/Group
-        public IEnumerable<Group> Get()
-        {
-            return new List<Group>();
-        }
 
         // GET: api/Group/5
         public IHttpActionResult Get(Guid groupId)
@@ -37,7 +32,7 @@ namespace SuperGrouper.Controllers
                 return Ok(group);
             }
 
-            return InternalServerError();
+            return NotFound();
         }
 
         // POST: api/Group
