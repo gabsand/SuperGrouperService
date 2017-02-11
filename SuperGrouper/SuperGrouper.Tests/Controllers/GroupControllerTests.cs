@@ -14,11 +14,25 @@ namespace SuperGrouper.Tests.Controllers
     public class GroupControllerTests
     {
         [Test]
+        public void GetGroup_InvalidObjectId_ReturnsBadRequest()
+        {
+            var groupId = "invalidObjectId";
+            var groupRepository = new Mock<IGroupRepository>();
+
+            var sut = new GroupController(groupRepository.Object);
+
+            var actionResult = sut.Get(groupId).Result;
+            var contentResult = actionResult as BadRequestErrorMessageResult;
+
+            Assert.IsNotNull(contentResult);
+        }
+
+        [Test]
         public void GetGroup_GroupRepositoryReturnsNull_ReturnsInternalServerError()
         {
             var groupId = ObjectId.GenerateNewId();
             var groupRepository = new Mock<IGroupRepository>();
-            groupRepository.Setup(x => x.GetGroup(It.IsAny<string>()))
+            groupRepository.Setup(x => x.GetGroup(It.IsAny<ObjectId>()))
                 .Returns(Task.FromResult<Group>(null));
 
             var sut = new GroupController(groupRepository.Object);
@@ -34,7 +48,7 @@ namespace SuperGrouper.Tests.Controllers
         {
             var groupId = ObjectId.GenerateNewId();
             var groupRepository = new Mock<IGroupRepository>();
-            groupRepository.Setup(x => x.GetGroup(It.IsAny<string>()))
+            groupRepository.Setup(x => x.GetGroup(It.IsAny<ObjectId>()))
                 .Returns(Task.FromResult<Group>(new Group() {Id = groupId}));
 
             var sut = new GroupController(groupRepository.Object);

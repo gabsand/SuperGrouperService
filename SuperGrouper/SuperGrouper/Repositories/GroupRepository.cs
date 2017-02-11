@@ -21,9 +21,9 @@ namespace SuperGrouper.Repositories
             return group;
         }
 
-        public async Task<Group> GetGroup(string groupId)
+        public async Task<Group> GetGroup(ObjectId groupObjectId)
         {
-            var filter = Builders<Group>.Filter.Eq("_id", ObjectId.Parse(groupId));
+            var filter = Builders<Group>.Filter.Eq("_id", groupObjectId);
             var group = await _groupCollection.Find(filter).SingleOrDefaultAsync();
 
             return group;

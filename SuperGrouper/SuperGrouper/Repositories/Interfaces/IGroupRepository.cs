@@ -1,6 +1,7 @@
 ﻿using System;
 using SuperGrouper.Models;
 using System.Threading.Tasks;
+using MongoDB.Bson;
 
 namespace SuperGrouper.Repositories.Interfaces
 {
@@ -8,6 +9,6 @@ namespace SuperGrouper.Repositories.Interfaces
     {
         Task<Group> SaveGroup(Group group);
 
-        Task<Group> GetGroup(string groupId);
+        Task<Group> GetGroup(ObjectId groupObjectId);
     }
 }
