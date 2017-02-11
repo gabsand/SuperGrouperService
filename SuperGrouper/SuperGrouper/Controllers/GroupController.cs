@@ -28,9 +28,16 @@ namespace SuperGrouper.Controllers
         }
 
         // GET: api/Group/5
-        public Group Get(Guid id)
+        public IHttpActionResult Get(Guid groupId)
         {
-            return new Group();
+            var group = _groupRepository.GetGroup(groupId);
+
+            if (group != null)
+            {
+                return Ok(group);
+            }
+
+            return InternalServerError();
         }
 
         // POST: api/Group

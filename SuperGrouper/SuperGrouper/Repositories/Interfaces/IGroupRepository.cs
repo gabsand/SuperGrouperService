@@ -1,4 +1,5 @@
-﻿using SuperGrouper.Models;
+﻿using System;
+using SuperGrouper.Models;
 
 namespace SuperGrouper.Repositories.Interfaces
 {
@@ -6,6 +7,6 @@ namespace SuperGrouper.Repositories.Interfaces
     {
         Group SaveGroup(Group group);
 
-        Group GetGroup(string groupId);
+        Group GetGroup(Guid groupId);
     }
 }

@@ -15,7 +15,7 @@ namespace SuperGrouper.Repositories
             return group;
         }
 
-        public Group GetGroup(string groupId)
+        public Group GetGroup(Guid groupId)
         {
             // get group from MongoDB
             return new Group();
