@@ -1,12 +1,13 @@
 ﻿using System;
 using SuperGrouper.Models;
+using System.Threading.Tasks;
 
 namespace SuperGrouper.Repositories.Interfaces
 {
     public interface IGroupRepository
     {
-        Group SaveGroup(Group group);
+        Task<Group> SaveGroup(Group group);
 
-        Group GetGroup(Guid groupId);
+        Task<Group> GetGroup(Guid groupId);
     }
 }

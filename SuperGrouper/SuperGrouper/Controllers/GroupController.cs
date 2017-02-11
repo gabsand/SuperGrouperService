@@ -23,9 +23,9 @@ namespace SuperGrouper.Controllers
         }
 
         // GET: api/Group/5
-        public IHttpActionResult Get(Guid groupId)
+        public async Task<IHttpActionResult> Get(Guid groupId)
         {
-            var group = _groupRepository.GetGroup(groupId);
+            var group = await _groupRepository.GetGroup(groupId);
 
             if (group != null)
             {
@@ -36,9 +36,9 @@ namespace SuperGrouper.Controllers
         }
 
         // POST: api/Group
-        public IHttpActionResult Post([FromBody]Group group)
+        public async Task<IHttpActionResult> Post([FromBody]Group group)
         {
-            var savedGroup = _groupRepository.SaveGroup(group);
+            var savedGroup = await _groupRepository.SaveGroup(group);
 
             if (savedGroup != null)
             {

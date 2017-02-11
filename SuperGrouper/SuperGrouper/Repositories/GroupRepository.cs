@@ -3,6 +3,7 @@ using SuperGrouper.Repositories.Interfaces;
 using SuperGrouper.Models;
 using MongoDB;
 using MongoDB.Driver;
+using System.Threading.Tasks;
 
 namespace SuperGrouper.Repositories
 {
@@ -14,17 +15,17 @@ namespace SuperGrouper.Repositories
         {
             _groupCollection = _database.GetCollection<Group>("Groups");
         }
-        public Group SaveGroup(Group group)
+        public async Task<Group> SaveGroup(Group group)
         {
             _groupCollection.InsertOne(group);
 
             return group;
         }
 
-        public Group GetGroup(Guid groupId)
+        public async Task<Group> GetGroup(Guid groupId)
         {
             var filter = Builders<Group>.Filter.Eq("Id", groupId.ToString());
-            var group = _groupCollection.Find(filter).FirstOrDefault();
+            var group = await _groupCollection.Find(filter).FirstAsync();
 
             return group;
         }
