@@ -17,7 +17,7 @@ namespace SuperGrouper.Repositories
         }
         public async Task<Group> SaveGroup(Group group)
         {
-            _groupCollection.InsertOne(group);
+            await _groupCollection.InsertOneAsync(group);
 
             return group;
         }
