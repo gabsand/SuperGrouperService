@@ -49,7 +49,7 @@ namespace SuperGrouper.Tests.Controllers
         {
             var group = new Group()
             {
-                Name = "Groupy Group"
+                Name = "Failure Group"
             };
 
             var groupRepository = new Mock<IGroupRepository>();
@@ -68,7 +68,7 @@ namespace SuperGrouper.Tests.Controllers
         {
             var group = new Group()
             {
-                Name = "Groupy Group"
+                Name = "Successful Group"
             };
 
             var groupRepository = new Mock<IGroupRepository>();
