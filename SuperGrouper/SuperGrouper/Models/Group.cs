@@ -11,7 +11,8 @@ namespace SuperGrouper.Models
         public ObjectId Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<Groupable> Members { get; set; }
+        public List<Member> Members { get; set; }
+        public List<GroupableFamily> GroupableFamilies { get; set; }
         public List<Partition> Partitions { get; set; }
         public Partition ParentPartition { get; set; }
     }
