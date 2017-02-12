@@ -11,10 +11,12 @@ namespace SuperGrouper
         public static void RegisterTypes(IUnityContainer container)
         {
             // Controllers
-            container.RegisterType<GroupController>();
+            container.RegisterType<GroupsController>();
+            container.RegisterType<GroupablesController>();
 
             // Repositories
             container.RegisterType<IGroupRepository, GroupRepository>();
+            container.RegisterType<IGroupablesRepository, GroupablesRepository>();
         }
     }
 }

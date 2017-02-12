@@ -11,7 +11,7 @@ using MongoDB.Bson;
 namespace SuperGrouper.Tests.Controllers
 {
     [TestFixture]
-    public class GroupControllerTests
+    public class GroupsControllerTests
     {
         [Test]
         public void GetGroup_InvalidObjectId_ReturnsBadRequest()
@@ -19,9 +19,9 @@ namespace SuperGrouper.Tests.Controllers
             var groupId = "invalidObjectId";
             var groupRepository = new Mock<IGroupRepository>();
 
-            var sut = new GroupController(groupRepository.Object);
+            var sut = new GroupsController(groupRepository.Object);
 
-            var actionResult = sut.Get(groupId).Result;
+            var actionResult = sut.GetGroup(groupId).Result;
             var contentResult = actionResult as BadRequestErrorMessageResult;
 
             Assert.IsNotNull(contentResult);
@@ -35,9 +35,9 @@ namespace SuperGrouper.Tests.Controllers
             groupRepository.Setup(x => x.GetGroup(It.IsAny<ObjectId>()))
                 .Returns(Task.FromResult<Group>(null));
 
-            var sut = new GroupController(groupRepository.Object);
+            var sut = new GroupsController(groupRepository.Object);
 
-            var actionResult = sut.Get(groupId.ToString()).Result;
+            var actionResult = sut.GetGroup(groupId.ToString()).Result;
             var contentResult = actionResult as NotFoundResult;
 
             Assert.IsNotNull(contentResult);
@@ -51,16 +51,16 @@ namespace SuperGrouper.Tests.Controllers
             groupRepository.Setup(x => x.GetGroup(It.IsAny<ObjectId>()))
                 .Returns(Task.FromResult<Group>(new Group() {Id = groupId}));
 
-            var sut = new GroupController(groupRepository.Object);
+            var sut = new GroupsController(groupRepository.Object);
 
-            var actionResult = sut.Get(groupId.ToString()).Result;
+            var actionResult = sut.GetGroup(groupId.ToString()).Result;
             var contentResult = actionResult as OkNegotiatedContentResult<Group>;
 
             Assert.IsTrue(contentResult.Content.Id.Equals(groupId));
         }
 
         [Test]
-        public void PostGroup_GroupRepositoryReturnsNull_ReturnsInternalServerError()
+        public void SaveGroup_GroupRepositoryReturnsNull_ReturnsInternalServerError()
         {
             var group = new Group()
             {
@@ -71,16 +71,16 @@ namespace SuperGrouper.Tests.Controllers
             groupRepository.Setup(x => x.SaveGroup(It.IsAny<Group>()))
                 .Returns(Task.FromResult<Group>(null));
 
-            var sut = new GroupController(groupRepository.Object);
+            var sut = new GroupsController(groupRepository.Object);
 
-            var actionResult = sut.Post(group).Result;
+            var actionResult = sut.SaveGroup(group).Result;
             var contentResult = actionResult as InternalServerErrorResult;
 
             Assert.IsNotNull(contentResult);
         }
 
         [Test]
-        public void PostGroup_GroupRepositoryReturnsSavedGroup_ReturnsOkWithCorrectGroup()
+        public void SaveGroup_GroupRepositoryReturnsSavedGroup_ReturnsOkWithCorrectGroup()
         {
             var group = new Group()
             {
@@ -91,9 +91,9 @@ namespace SuperGrouper.Tests.Controllers
             groupRepository.Setup(x => x.SaveGroup(It.IsAny<Group>()))
                 .Returns(Task.FromResult<Group>(group));
 
-            var sut = new GroupController(groupRepository.Object);
+            var sut = new GroupsController(groupRepository.Object);
 
-            var actionResult = sut.Post(group).Result;
+            var actionResult = sut.SaveGroup(group).Result;
             var contentResult = actionResult as OkNegotiatedContentResult<Group>;
 
             Assert.IsTrue(contentResult.Content.Name.Equals(group.Name));

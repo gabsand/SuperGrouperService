@@ -3,6 +3,8 @@ using SuperGrouper.Models;
 using MongoDB.Driver;
 using System.Threading.Tasks;
 using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
 
 namespace SuperGrouper.Repositories
 {
@@ -27,6 +29,43 @@ namespace SuperGrouper.Repositories
             var group = await _groupCollection.Find(filter).SingleOrDefaultAsync();
 
             return group;
+        }
+
+        public async Task<List<GroupableFamily>> GetGroupableFamilies(ObjectId groupObjectId)
+        {
+            var filter = Builders<Group>.Filter.Eq("_id", groupObjectId);
+            var group = await _groupCollection.Find(filter).SingleOrDefaultAsync();
+
+            return group != null ? group.GroupableFamilies : new List<GroupableFamily>(); // TODO: handle case when group doesn't exist
+        }
+
+        public async Task<GroupableFamily> AddGroupableFamily(ObjectId groupObjectId, GroupableFamily groupableFamily)
+        {
+            var filter = Builders<Group>.Filter.Eq("_id", groupObjectId);
+            var update = Builders<Group>.Update.AddToSet("GroupableFamilies", groupableFamily);
+
+            await _groupCollection.UpdateOneAsync(filter, update);
+
+            return groupableFamily;
+        }
+
+        public async Task<List<Member>> GetMembers(ObjectId groupObjectId)
+        {
+            var filter = Builders<Group>.Filter.Eq("_id", groupObjectId);
+            var group = await _groupCollection.Find(filter).SingleOrDefaultAsync();
+
+            return group != null ? group.Members : new List<Member>(); // TODO: handle case when group doesn't exist
+
+        }
+
+        public async Task<List<Member>> AddMembers(ObjectId groupObjectId, List<Member> members)
+        {
+            var filter = Builders<Group>.Filter.Eq("_id", groupObjectId);
+            var update = Builders<Group>.Update.AddToSetEach("Members", members);
+
+            await _groupCollection.UpdateOneAsync(filter, update);
+
+            return members;
         }
     }
 }
