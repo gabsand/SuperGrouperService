@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using SuperGrouper.Repositories;
 using SuperGrouper.Repositories.Interfaces;
+using MongoDB.Bson;
 
 namespace SuperGrouper.Controllers
 {
@@ -23,22 +24,31 @@ namespace SuperGrouper.Controllers
         }
 
         // GET: api/Group/5
-        public IHttpActionResult Get(Guid groupId)
+        public async Task<IHttpActionResult> Get(string groupId)
         {
-            var group = _groupRepository.GetGroup(groupId);
-
-            if (group != null)
+            try
             {
-                return Ok(group);
-            }
+                var groupObjectId = ObjectId.Parse(groupId);
+                
+                var group = await _groupRepository.GetGroup(groupObjectId);
 
-            return NotFound();
+                if (group != null)
+                {
+                    return Ok(group);
+                }
+
+                return NotFound();
+            }
+            catch
+            {
+                return BadRequest("groupId must be a 12 byte string");
+            }
         }
 
         // POST: api/Group
-        public IHttpActionResult Post([FromBody]Group group)
+        public async Task<IHttpActionResult> Post([FromBody]Group group)
         {
-            var savedGroup = _groupRepository.SaveGroup(group);
+            var savedGroup = await _groupRepository.SaveGroup(group);
 
             if (savedGroup != null)
             {
