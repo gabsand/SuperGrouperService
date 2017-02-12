@@ -24,6 +24,7 @@ namespace SuperGrouper.Controllers
             _groupRepository = groupRepository;
         }
         
+        [HttpGet]
         [Route("groups")]
         public async Task<IHttpActionResult> GetGroup(string groupId)
         {
@@ -46,6 +47,7 @@ namespace SuperGrouper.Controllers
             }
         }
 
+        [HttpPost]
         [Route("groups")]
         public async Task<IHttpActionResult> SaveGroup([FromBody]Group group)
         {
@@ -59,6 +61,7 @@ namespace SuperGrouper.Controllers
             return InternalServerError();
         }
 
+        [HttpGet]
         [Route("groups/{groupId}/groupablefamilies")]
         public async Task<IHttpActionResult> GetGroupableFamilies(string groupId)
         {
@@ -67,6 +70,7 @@ namespace SuperGrouper.Controllers
             return Ok(groupableFamilies);
         }
 
+        [HttpPut]
         [Route("groups/{groupId}/groupablefamilies")]
         public async Task<IHttpActionResult> AddGroupableFamily(string groupId, [FromBody]GroupableFamily groupableFamily)
         {
@@ -75,16 +79,22 @@ namespace SuperGrouper.Controllers
             return Ok(addedGroupableFamily);
         }
 
+        [HttpGet]
         [Route("groups/{groupId}/members")]
         public async Task<IHttpActionResult> GetMembers(string groupId)
         {
-            return Ok(new List<Member>());
+            var members = await _groupRepository.GetMembers(ObjectId.Parse(groupId));
+
+            return Ok(members);
         }
 
+        [HttpPut]
         [Route("groups/{groupId}/members")]
         public async Task<IHttpActionResult> AddMembers(string groupId, [FromBody]List<Member> members)
         {
-            return Ok(new List<Member>());
+            var addedMembers = await _groupRepository.AddMembers(ObjectId.Parse(groupId), members);
+
+            return Ok(addedMembers);
         }
     }
 }
