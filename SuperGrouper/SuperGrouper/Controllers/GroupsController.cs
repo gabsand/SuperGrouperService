@@ -70,7 +70,7 @@ namespace SuperGrouper.Controllers
             return Ok(groupableFamilies);
         }
 
-        [HttpPut]
+        [HttpPatch]
         [Route("groups/{groupId}/groupablefamilies")]
         public async Task<IHttpActionResult> AddGroupableFamily(string groupId, [FromBody]GroupableFamily groupableFamily)
         {
@@ -88,7 +88,7 @@ namespace SuperGrouper.Controllers
             return Ok(members);
         }
 
-        [HttpPut]
+        [HttpPatch]
         [Route("groups/{groupId}/members")]
         public async Task<IHttpActionResult> AddMembers(string groupId, [FromBody]List<Member> members)
         {

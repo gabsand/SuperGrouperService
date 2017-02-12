@@ -12,9 +12,11 @@ namespace SuperGrouper
         {
             // Controllers
             container.RegisterType<GroupsController>();
+            container.RegisterType<GroupablesController>();
 
             // Repositories
             container.RegisterType<IGroupRepository, GroupRepository>();
+            container.RegisterType<IGroupablesRepository, GroupablesRepository>();
         }
     }
 }
