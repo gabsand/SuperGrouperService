@@ -11,7 +11,7 @@ namespace SuperGrouper
         public static void RegisterTypes(IUnityContainer container)
         {
             // Controllers
-            container.RegisterType<GroupController>();
+            container.RegisterType<GroupsController>();
 
             // Repositories
             container.RegisterType<IGroupRepository, GroupRepository>();
