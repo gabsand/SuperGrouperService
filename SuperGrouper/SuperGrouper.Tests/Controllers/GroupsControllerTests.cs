@@ -11,7 +11,7 @@ using MongoDB.Bson;
 namespace SuperGrouper.Tests.Controllers
 {
     [TestFixture]
-    public class GroupControllerTests
+    public class GroupsControllerTests
     {
         [Test]
         public void GetGroup_InvalidObjectId_ReturnsBadRequest()
@@ -60,7 +60,7 @@ namespace SuperGrouper.Tests.Controllers
         }
 
         [Test]
-        public void PostGroup_GroupRepositoryReturnsNull_ReturnsInternalServerError()
+        public void SaveGroup_GroupRepositoryReturnsNull_ReturnsInternalServerError()
         {
             var group = new Group()
             {
@@ -80,7 +80,7 @@ namespace SuperGrouper.Tests.Controllers
         }
 
         [Test]
-        public void PostGroup_GroupRepositoryReturnsSavedGroup_ReturnsOkWithCorrectGroup()
+        public void SaveGroup_GroupRepositoryReturnsSavedGroup_ReturnsOkWithCorrectGroup()
         {
             var group = new Group()
             {

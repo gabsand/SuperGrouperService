@@ -26,7 +26,7 @@ namespace SuperGrouper.Controllers
         }
 
         [HttpGet]
-        public async Task<IHttpActionResult> GetGroup(string groupableId)
+        public async Task<IHttpActionResult> GetGroupable(string groupableId)
         {
             try
             {
