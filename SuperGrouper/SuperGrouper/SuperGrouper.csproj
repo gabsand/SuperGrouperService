@@ -289,8 +289,8 @@
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Group.cs" />
-    <Compile Include="Models\Groupable.cs" />
-    <Compile Include="Models\GroupableFamily.cs" />
+    <Compile Include="Models\GroupableInstance.cs" />
+    <Compile Include="Models\GroupableTemplate.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Member.cs" />
     <Compile Include="Models\Partition.cs" />

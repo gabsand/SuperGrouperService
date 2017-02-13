@@ -9,25 +9,25 @@ namespace SuperGrouper.Repositories
 {
     public class GroupablesRepository : BaseMongoRepository, IGroupablesRepository
     {
-        protected static IMongoCollection<Groupable> _groupablesCollection;
+        protected static IMongoCollection<GroupableInstance> _groupablesCollection;
 
         public GroupablesRepository(): base()
         {
-            _groupablesCollection = _database.GetCollection<Groupable>("Groupables");
+            _groupablesCollection = _database.GetCollection<GroupableInstance>("Groupables");
         }
-        public async Task<Groupable> GetGroupable(ObjectId groupableObjectId)
+        public async Task<GroupableInstance> GetGroupable(ObjectId groupableObjectId)
         {
-            var filter = Builders<Groupable>.Filter.Eq("_id", groupableObjectId);
+            var filter = Builders<GroupableInstance>.Filter.Eq("_id", groupableObjectId);
             var groupable = await _groupablesCollection.Find(filter).SingleOrDefaultAsync();
 
             return groupable;
         }
 
-        public async Task<Groupable> SaveGroupable(Groupable groupable)
+        public async Task<GroupableInstance> SaveGroupable(GroupableInstance groupableInstance)
         {
-            await _groupablesCollection.InsertOneAsync(groupable);
+            await _groupablesCollection.InsertOneAsync(groupableInstance);
 
-            return groupable;
+            return groupableInstance;
         }
     }
 }

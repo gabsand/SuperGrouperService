@@ -6,7 +6,7 @@ using System.Web;
 
 namespace SuperGrouper.Models
 {
-    public class GroupableFamily
+    public class GroupableTemplate
     {
         public ObjectId Id { get; set; }
         public string Name { get; set; }

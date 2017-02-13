@@ -8,7 +8,7 @@ namespace SuperGrouper.Models
         public ObjectId Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public GroupableFamily GroupableFamily { get; set; }
+        public GroupableTemplate GroupableTemplate { get; set; }
         public List<ObjectId> GroupIds { get; set; }
         public ObjectId ParentGroupId { get; set; }
     }

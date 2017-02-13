@@ -12,8 +12,5 @@ namespace SuperGrouper.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public List<Member> Members { get; set; }
-        public List<GroupableFamily> GroupableFamilies { get; set; }
-        public List<Partition> Partitions { get; set; }
-        public Partition ParentPartition { get; set; }
     }
 }

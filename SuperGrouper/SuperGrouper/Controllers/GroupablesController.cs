@@ -48,9 +48,9 @@ namespace SuperGrouper.Controllers
         }
 
         [HttpPost]
-        public async Task<IHttpActionResult> SaveGroupable([FromBody]Groupable groupable)
+        public async Task<IHttpActionResult> SaveGroupable([FromBody]GroupableInstance groupableInstance)
         {
-            var savedGroupable = await _groupablesRepository.SaveGroupable(groupable);
+            var savedGroupable = await _groupablesRepository.SaveGroupable(groupableInstance);
 
             if (savedGroupable != null)
             {

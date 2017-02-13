@@ -72,20 +72,11 @@ namespace SuperGrouper.Controllers
 
         [HttpPatch]
         [Route("groups/{groupId}/groupablefamilies")]
-        public async Task<IHttpActionResult> AddGroupableFamily(string groupId, [FromBody]GroupableFamily groupableFamily)
+        public async Task<IHttpActionResult> AddGroupableFamily(string groupId, [FromBody]GroupableTemplate groupableTemplate)
         {
-            var addedGroupableFamily = await _groupRepository.AddGroupableFamily(ObjectId.Parse(groupId), groupableFamily);
+            var addedGroupableFamily = await _groupRepository.AddGroupableFamily(ObjectId.Parse(groupId), groupableTemplate);
 
             return Ok(addedGroupableFamily);
-        }
-
-        [HttpGet]
-        [Route("groups/{groupId}/members")]
-        public async Task<IHttpActionResult> GetMembers(string groupId)
-        {
-            var members = await _groupRepository.GetMembers(ObjectId.Parse(groupId));
-
-            return Ok(members);
         }
 
         [HttpPatch]
