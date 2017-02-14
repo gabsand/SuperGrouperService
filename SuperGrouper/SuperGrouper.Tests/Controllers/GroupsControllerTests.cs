@@ -11,32 +11,56 @@ using SuperGrouper.Controllers.Validators;
 using SuperGrouper.Repositories;
 using FluentValidation;
 using System.Collections.Generic;
+using FluentValidation.Results;
 
 namespace SuperGrouper.Tests.Controllers
 {
     [TestFixture]
     public class GroupsControllerTests
     {
-        public GroupsController GetGroupsController(IGroupRepository groupRepository = null, 
+        private GroupsController GetGroupsController(IGroupRepository groupRepository = null, 
             IValidator<string> objectIdValidator = null,
             IValidator<Group> groupValidator = null, 
             IValidator<List<Member>> membersValidator = null)
         {
             var mockGroupRepository = groupRepository ?? new Mock<IGroupRepository>().Object;
-            var mockObjectIdValidator = objectIdValidator ?? new Mock<IValidator<string>>().Object;
-            var mockGroupValidator = groupValidator ?? new Mock<IValidator<Group>>().Object;
+            var mockObjectIdValidator = objectIdValidator ?? GetObjectIdValidatorWithValidResult();
+            var mockGroupValidator = groupValidator ?? GetGroupValidatorWithValidResult();
             var mockMembersValidator = membersValidator ?? new Mock<IValidator<List<Member>>>().Object;
 
             return new GroupsController(mockGroupRepository, mockObjectIdValidator, mockGroupValidator, mockMembersValidator);
         }
 
+        private IValidator<string> GetObjectIdValidatorWithValidResult()
+        {
+            var objectIdValidator = new Mock<IValidator<string>>();
+            var isValidResult = new ValidationResult(new List<ValidationFailure>());
+            objectIdValidator.Setup(x => x.Validate(It.IsAny<string>())).Returns(() => isValidResult);
+
+            return objectIdValidator.Object;
+        }
+
+        private IValidator<Group> GetGroupValidatorWithValidResult()
+        {
+            var groupValidator = new Mock<IValidator<Group>>();
+            var isValidResult = new ValidationResult(new List<ValidationFailure>());
+            groupValidator.Setup(x => x.Validate(It.IsAny<Group>())).Returns(() => isValidResult);
+
+            return groupValidator.Object;
+        }
+
         [Test]
-        public void GetGroup_InvalidObjectId_ReturnsBadRequest()
+        public void GetGroup_ObjectIdValidationFails_ReturnsBadRequest()
         {
             var groupId = "invalidObjectId";
-            var groupRepository = new Mock<IGroupRepository>();
+            var objectIdValidator = new Mock<IValidator<string>>();
+            var isInvalidResult = new ValidationResult(new List<ValidationFailure>()
+            {
+                new ValidationFailure("objectId", "invalid object id")
+            });
+            objectIdValidator.Setup(x => x.Validate(It.IsAny<string>())).Returns(() => isInvalidResult);
 
-            var sut = GetGroupsController(groupRepository.Object);
+            var sut = GetGroupsController(null, objectIdValidator.Object);
 
             var actionResult = sut.GetGroup(groupId).Result;
             var contentResult = actionResult as BadRequestErrorMessageResult;
