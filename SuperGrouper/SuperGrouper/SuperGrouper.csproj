@@ -286,10 +286,10 @@
     <Compile Include="Controllers\GroupablesController.cs" />
     <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\Validators\GroupValidator.cs" />
-    <Compile Include="Controllers\Validators\MembersValidator.cs" />
-    <Compile Include="Controllers\Validators\MemberValidator.cs" />
-    <Compile Include="Controllers\Validators\ObjectIdValidator.cs" />
+    <Compile Include="Validators\GroupValidator.cs" />
+    <Compile Include="Validators\MembersValidator.cs" />
+    <Compile Include="Validators\MemberValidator.cs" />
+    <Compile Include="Validators\ObjectIdValidator.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
