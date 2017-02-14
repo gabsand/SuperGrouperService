@@ -31,23 +31,23 @@ namespace SuperGrouper.Repositories
             return group;
         }
 
-        public async Task<List<GroupableTemplate>> GetGroupableFamilies(ObjectId groupObjectId)
-        {
-            var filter = Builders<Group>.Filter.Eq("_id", groupObjectId);
-            var group = await _groupCollection.Find(filter).SingleOrDefaultAsync();
+        //public async Task<List<GroupableTemplate>> GetGroupableFamilies(ObjectId groupObjectId)
+        //{
+        //    var filter = Builders<Group>.Filter.Eq("_id", groupObjectId);
+        //    var group = await _groupCollection.Find(filter).SingleOrDefaultAsync();
 
-            return group != null ? group.GroupableFamilies : new List<GroupableTemplate>(); // TODO: handle case when group doesn't exist
-        }
+        //    return group != null ? group.GroupableFamilies : new List<GroupableTemplate>(); // TODO: handle case when group doesn't exist
+        //}
 
-        public async Task<GroupableTemplate> AddGroupableFamily(ObjectId groupObjectId, GroupableTemplate groupableTemplate)
-        {
-            var filter = Builders<Group>.Filter.Eq("_id", groupObjectId);
-            var update = Builders<Group>.Update.AddToSet("GroupableFamilies", groupableTemplate);
+        //public async Task<GroupableTemplate> AddGroupableFamily(ObjectId groupObjectId, GroupableTemplate groupableTemplate)
+        //{
+        //    var filter = Builders<Group>.Filter.Eq("_id", groupObjectId);
+        //    var update = Builders<Group>.Update.AddToSet("GroupableFamilies", groupableTemplate);
 
-            await _groupCollection.UpdateOneAsync(filter, update);
+        //    await _groupCollection.UpdateOneAsync(filter, update);
 
-            return groupableTemplate;
-        }
+        //    return groupableTemplate;
+        //}
 
         public async Task<List<Member>> GetMembers(ObjectId groupObjectId)
         {
