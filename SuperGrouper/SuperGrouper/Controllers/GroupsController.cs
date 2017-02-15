@@ -9,7 +9,7 @@ using FluentValidation;
 
 namespace SuperGrouper.Controllers
 {
-    [RoutePrefix("api/v1")]
+    [RoutePrefix("api/v1/groups")]
     public sealed class GroupsController : ApiController
     {
         private readonly IGroupRepository _groupRepository;
@@ -34,7 +34,6 @@ namespace SuperGrouper.Controllers
         }
         
         [HttpGet]
-        [Route("groups")]
         public async Task<IHttpActionResult> GetGroup(string groupId)
         {
             if (!_objectIdValidator.Validate(groupId).IsValid)
@@ -54,7 +53,6 @@ namespace SuperGrouper.Controllers
         }
 
         [HttpPost]
-        [Route("groups")]
         public async Task<IHttpActionResult> SaveGroup([FromBody]Group group)
         {
             if (!_groupValidator.Validate(group).IsValid)
@@ -72,26 +70,8 @@ namespace SuperGrouper.Controllers
             return Ok(savedGroup);
         }
 
-        //[HttpGet]
-        //[Route("groups/{groupId}/groupablefamilies")]
-        //public async Task<IHttpActionResult> GetGroupableFamilies(string groupId)
-        //{
-        //    var groupableFamilies = await _groupRepository.GetGroupableFamilies(ObjectId.Parse(groupId));
-
-        //    return Ok(groupableFamilies);
-        //}
-
-        //[HttpPatch]
-        //[Route("groups/{groupId}/groupablefamilies")]
-        //public async Task<IHttpActionResult> AddGroupableFamily(string groupId, [FromBody]GroupableTemplate groupableTemplate)
-        //{
-        //    var addedGroupableFamily = await _groupRepository.AddGroupableFamily(ObjectId.Parse(groupId), groupableTemplate);
-
-        //    return Ok(addedGroupableFamily);
-        //}
-
         [HttpPatch]
-        [Route("groups/{groupId}/members")]
+        [Route("{groupId}/members")]
         public async Task<IHttpActionResult> AddMembers(string groupId, [FromBody]List<Member> members)
         {
             if (!_objectIdValidator.Validate(groupId).IsValid)

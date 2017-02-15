@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using SuperGrouper.Models;
 
-namespace SuperGrouper.Controllers.Validators
+namespace SuperGrouper.Validators
 {
     public class GroupValidator: AbstractValidator<Group>
     {

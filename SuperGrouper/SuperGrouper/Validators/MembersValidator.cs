@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace SuperGrouper.Controllers.Validators
+namespace SuperGrouper.Validators
 {
     public class MembersValidator: AbstractValidator<List<Member>>
     {
