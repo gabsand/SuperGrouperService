@@ -102,9 +102,10 @@ namespace SuperGrouper.Controllers
             {
                 return BadRequest("Must have at least one member and each member must have a valid Name.");
             }
-            var addedMembers = await _groupRepository.AddMembers(ObjectId.Parse(groupId), members);
 
-            return Ok(addedMembers);
+            await _groupRepository.AddMembers(ObjectId.Parse(groupId), members);
+
+            return Ok();
         }
     }
 }

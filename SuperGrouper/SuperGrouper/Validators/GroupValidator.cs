@@ -7,6 +7,7 @@ namespace SuperGrouper.Controllers.Validators
     {
         public GroupValidator()
         {
+            RuleFor(group => group).NotNull();
             RuleFor(group => group.Name).NotEmpty();
         }
     }

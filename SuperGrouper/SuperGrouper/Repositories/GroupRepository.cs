@@ -49,15 +49,6 @@ namespace SuperGrouper.Repositories
         //    return groupableTemplate;
         //}
 
-        public async Task<List<Member>> GetMembers(ObjectId groupObjectId)
-        {
-            var filter = Builders<Group>.Filter.Eq("_id", groupObjectId);
-            var group = await _groupCollection.Find(filter).SingleOrDefaultAsync();
-
-            return group != null ? group.Members : new List<Member>(); // TODO: handle case when group doesn't exist
-
-        }
-
         public async Task<List<Member>> AddMembers(ObjectId groupObjectId, List<Member> members)
         {
             var filter = Builders<Group>.Filter.Eq("_id", groupObjectId);
