@@ -13,6 +13,11 @@ using MongoDB.Bson;
 
 namespace SuperGrouper.Controllers
 {
+    /// <summary>
+    /// Enables creation and retrieval of "groupable templates," where "groupable templates"
+    /// are templates for creating "groupables," which are objects that can be grouped to form 
+    /// a partition of a group.
+    /// </summary>
     [RoutePrefix("api/v1/groupableTemplates")]
     public class GroupableTemplatesController : ApiController
     {
@@ -33,7 +38,13 @@ namespace SuperGrouper.Controllers
             _groupValidator = groupableTemplateValidator;
         }
 
+        /// <summary>
+        /// Gets groupable template its id.
+        /// </summary>
+        /// <param name="groupableTemplateId"></param>
+        /// <returns></returns>
         [HttpGet]
+        [Route("")]
         public async Task<IHttpActionResult> GetGroupableTemplate(string groupableTemplateId)
         {
             if (!_objectIdValidator.Validate(groupableTemplateId).IsValid)
@@ -53,7 +64,13 @@ namespace SuperGrouper.Controllers
             return Ok(groupableTemplate);
         }
 
+        /// <summary>
+        /// Saves groupable template.
+        /// </summary>
+        /// <param name="groupableTemplate"></param>
+        /// <returns></returns>
         [HttpPost]
+        [Route("")]
         public async Task<IHttpActionResult> SaveGroupableTemplate([FromBody]GroupableTemplate groupableTemplate)
         {
             if (!_groupValidator.Validate(groupableTemplate).IsValid)
@@ -71,6 +88,11 @@ namespace SuperGrouper.Controllers
             return Ok(savedGroup);
         }
 
+        /// <summary>
+        /// Gets groupable template by the id of the group to which it is associated.
+        /// </summary>
+        /// <param name="groupId"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("groupId={groupId}")]
         public async Task<IHttpActionResult> GetGroupableTemplatesByGroupId(string groupId)

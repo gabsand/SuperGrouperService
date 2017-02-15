@@ -9,6 +9,9 @@ using FluentValidation;
 
 namespace SuperGrouper.Controllers
 {
+    /// <summary>
+    /// Enables group creation, retrieval, and modification.
+    /// </summary>
     [RoutePrefix("api/v1/groups")]
     public sealed class GroupsController : ApiController
     {
@@ -33,6 +36,11 @@ namespace SuperGrouper.Controllers
             _membersValidator = membersValidator;
         }
         
+        /// <summary>
+        /// Gets group by its id.
+        /// </summary>
+        /// <param name="groupId"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IHttpActionResult> GetGroup(string groupId)
         {
@@ -52,6 +60,11 @@ namespace SuperGrouper.Controllers
             return Ok(group);
         }
 
+        /// <summary>
+        /// Saves group.
+        /// </summary>
+        /// <param name="group"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IHttpActionResult> SaveGroup([FromBody]Group group)
         {
@@ -70,6 +83,12 @@ namespace SuperGrouper.Controllers
             return Ok(savedGroup);
         }
 
+        /// <summary>
+        /// Adds a list of members to the group which is specified by its id.
+        /// </summary>
+        /// <param name="groupId"></param>
+        /// <param name="members"></param>
+        /// <returns></returns>
         [HttpPatch]
         [Route("{groupId}/members")]
         public async Task<IHttpActionResult> AddMembers(string groupId, [FromBody]List<Member> members)
