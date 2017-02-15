@@ -30,7 +30,7 @@ namespace SuperGrouper.Controllers
             {
                 var groupableObjectId = ObjectId.Parse(groupableId);
 
-                var group = await _groupablesRepository.GetGroupable(groupableObjectId);
+                var group = await _groupablesRepository.GetGroupableInstance(groupableObjectId);
 
                 if (group != null)
                 {
@@ -48,7 +48,7 @@ namespace SuperGrouper.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> SaveGroupable([FromBody]GroupableInstance groupableInstance)
         {
-            var savedGroupable = await _groupablesRepository.SaveGroupable(groupableInstance);
+            var savedGroupable = await _groupablesRepository.SaveGroupableInstance(groupableInstance);
 
             if (savedGroupable != null)
             {

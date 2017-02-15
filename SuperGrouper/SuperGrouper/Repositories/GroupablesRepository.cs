@@ -15,15 +15,15 @@ namespace SuperGrouper.Repositories
         {
             _groupablesCollection = _database.GetCollection<GroupableInstance>("Groupables");
         }
-        public async Task<GroupableInstance> GetGroupable(ObjectId groupableObjectId)
+        public async Task<GroupableInstance> GetGroupableInstance(ObjectId groupableInstanceObjectId)
         {
-            var filter = Builders<GroupableInstance>.Filter.Eq("_id", groupableObjectId);
-            var groupable = await _groupablesCollection.Find(filter).SingleOrDefaultAsync();
+            var filter = Builders<GroupableInstance>.Filter.Eq("_id", groupableInstanceObjectId);
+            var groupableInstance = await _groupablesCollection.Find(filter).SingleOrDefaultAsync();
 
-            return groupable;
+            return groupableInstance;
         }
 
-        public async Task<GroupableInstance> SaveGroupable(GroupableInstance groupableInstance)
+        public async Task<GroupableInstance> SaveGroupableInstance(GroupableInstance groupableInstance)
         {
             await _groupablesCollection.InsertOneAsync(groupableInstance);
 

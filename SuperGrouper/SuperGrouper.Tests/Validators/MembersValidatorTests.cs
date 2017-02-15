@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
-using SuperGrouper.Controllers.Validators;
+using SuperGrouper.Validators;
 using SuperGrouper.Models;
 
 namespace SuperGrouper.Tests.Validators

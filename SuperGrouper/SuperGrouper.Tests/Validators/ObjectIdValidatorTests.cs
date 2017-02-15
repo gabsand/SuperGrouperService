@@ -1,11 +1,5 @@
 ﻿using NUnit.Framework;
-using SuperGrouper.Controllers.Validators;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentValidation.TestHelper;
+using SuperGrouper.Validators;
 using MongoDB.Bson;
 
 namespace SuperGrouper.Tests.Validators
