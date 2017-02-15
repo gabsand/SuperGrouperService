@@ -290,7 +290,6 @@
     <Compile Include="Validators\MembersValidator.cs" />
     <Compile Include="Validators\MemberValidator.cs" />
     <Compile Include="Validators\ObjectIdValidator.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
