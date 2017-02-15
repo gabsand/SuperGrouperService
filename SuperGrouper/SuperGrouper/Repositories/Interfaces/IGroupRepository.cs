@@ -10,8 +10,6 @@ namespace SuperGrouper.Repositories.Interfaces
     {
         Task<Group> SaveGroup(Group group);
         Task<Group> GetGroup(ObjectId groupObjectId);
-        //Task<List<GroupableTemplate>>GetGroupableFamilies(ObjectId groupObjectId);
-        //Task<GroupableTemplate> AddGroupableFamily(ObjectId groupObjectId, GroupableTemplate groupableTemplate);
         Task<List<Member>> AddMembers(ObjectId groupObjectId, List<Member> members);
     }
 }

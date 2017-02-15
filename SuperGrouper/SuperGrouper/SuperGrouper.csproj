@@ -286,6 +286,8 @@
     <Compile Include="Controllers\GroupablesController.cs" />
     <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Repositories\GroupableTemplatesRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IGroupableTemplatesRepository.cs" />
     <Compile Include="Validators\GroupValidator.cs" />
     <Compile Include="Validators\MembersValidator.cs" />
     <Compile Include="Validators\MemberValidator.cs" />
