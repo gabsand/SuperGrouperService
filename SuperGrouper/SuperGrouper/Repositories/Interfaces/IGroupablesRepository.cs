@@ -6,7 +6,7 @@ namespace SuperGrouper.Repositories.Interfaces
 {
     public interface IGroupablesRepository
     {
-        Task<GroupableInstance> SaveGroupable(GroupableInstance groupableInstance);
-        Task<GroupableInstance> GetGroupable(ObjectId groupableObjectId);
+        Task<GroupableInstance> SaveGroupableInstance(GroupableInstance groupableInstance);
+        Task<GroupableInstance> GetGroupableInstance(ObjectId groupableObjectId);
     }
 }

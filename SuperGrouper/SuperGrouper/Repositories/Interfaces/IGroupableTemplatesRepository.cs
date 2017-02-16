@@ -8,6 +8,8 @@ namespace SuperGrouper.Repositories.Interfaces
 {
     public interface IGroupableTemplatesRepository
     {
-        Task<List<GroupableTemplate>> GetGroupableTemplates(ObjectId groupObjectId);
+        Task<GroupableTemplate> GetGroupableTemplate(ObjectId groupableObjectId);
+        Task<GroupableTemplate> SaveGroupableTemplate(GroupableTemplate groupableTemplate);
+        Task<List<GroupableTemplate>> GetGroupableTemplatesByGroupId(ObjectId groupObjectId);
     }
 }

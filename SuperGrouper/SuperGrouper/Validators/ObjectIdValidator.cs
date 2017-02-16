@@ -5,7 +5,7 @@ using System.Web;
 using FluentValidation;
 using MongoDB.Bson;
 
-namespace SuperGrouper.Controllers.Validators
+namespace SuperGrouper.Validators
 {
     public class ObjectIdValidator: AbstractValidator<string>
     {

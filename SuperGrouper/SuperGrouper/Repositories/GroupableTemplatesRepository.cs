@@ -16,9 +16,25 @@ namespace SuperGrouper.Repositories
 
         public GroupableTemplatesRepository(): base()
         {
-            _groupableTemplatesCollection = _database.GetCollection<GroupableTemplate>("Groups");
+            _groupableTemplatesCollection = _database.GetCollection<GroupableTemplate>("GroupableTemplates");
         }
-        public async Task<List<GroupableTemplate>> GetGroupableTemplates(ObjectId groupObjectId)
+
+        public async Task<GroupableTemplate> GetGroupableTemplate(ObjectId groupableObjectId)
+        {
+            var filter = Builders<GroupableTemplate>.Filter.Eq("_id", groupableObjectId);
+            var groupableTemplate = await _groupableTemplatesCollection.Find(filter).FirstOrDefaultAsync();
+
+            return groupableTemplate;
+        }
+
+        public async Task<GroupableTemplate> SaveGroupableTemplate(GroupableTemplate groupableTemplate)
+        {
+            await _groupableTemplatesCollection.InsertOneAsync(groupableTemplate);
+
+            return groupableTemplate;
+        }
+
+        public async Task<List<GroupableTemplate>> GetGroupableTemplatesByGroupId(ObjectId groupObjectId)
         {
             var filter = Builders<GroupableTemplate>.Filter.Eq("GroupId", groupObjectId);
             var groupableTemplates = await _groupableTemplatesCollection.Find(filter).ToListAsync();

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using SuperGrouper.Models;
-using SuperGrouper.Controllers.Validators;
+using SuperGrouper.Validators;
 using FluentValidation.TestHelper;
 
 namespace SuperGrouper.Tests.Validators
